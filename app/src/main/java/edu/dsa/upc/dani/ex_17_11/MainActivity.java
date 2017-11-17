@@ -12,9 +12,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button buto1;
+
+
+    @Override
+    public void onClick(View view) {
+        EditText txtent = (EditText) findViewById(R.id.textentrada1);
+        String vstring = txtent.getText().toString();
+        Intent inb1 = new Intent(this, Activity2.class);
+        inb1.putExtra("valor1",vstring);
+        startActivityForResult(inb1,100);
+
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,16 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         buto1 = (Button) findViewById(R.id.bt1);
-        buto1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                EditText txtent = (EditText) findViewById(R.id.textentrada1);
-                String vstring = txtent.getText().toString();
-                Intent inb1 = new Intent(MainActivity.this, Activity2.class);
-                inb1.putExtra("valor1",vstring);
-                startActivityForResult(inb1,100);
-            }
-        });
+        buto1.setOnClickListener(this);
     }
 
     protected void onActivityResult ( int requestCode , int resultCode, Intent data){
